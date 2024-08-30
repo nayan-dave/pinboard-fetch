@@ -17,7 +17,6 @@ class MainController extends Controller
         if(!empty($tags))
         {
             $items = Pinboard::all()->reject(function (Pinboard $item) use($tags) {
-                    //print_r($tags);
                     $allTagsNotExist = false;
                     foreach($tags AS $tag)
                     {

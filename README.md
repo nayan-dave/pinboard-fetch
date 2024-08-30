@@ -11,50 +11,41 @@ To get started, you'll need to follow below steps:
 $ composer install
 $ npm install
 ```
+
+Rename the `.env.example` file to `.env`
+Create MySQL Database and set name of created database in `.env` as example given below.
+DB_DATABASE=keystone_law
+set other DB configuration based on your environment setup.
+
+Once DB created and `.env` set up run below command
+
+```bash
+$ php artisan migrate
+```
+
 ## Usage
 
-Download RSS feed from URL:
+Download RSS feed from URL and add pinboard data in DB:
 
-```php
-  $rss = Feeder::loadRss($url);
+```bash
+$ php artisan command:fetchPinboard
 ```
 
-The returned properties are SimpleXMLElement objects. Extracting
-the information from the channel is easy:
-
-
-```php
-  echo 'Title: ', $rss->title;
-  echo 'Description: ', $rss->description;
-  echo 'Link: ', $rss->link;
-
-  foreach ($rss->item as $item) {
-    echo 'Title: ', $item->title;
-    echo 'Link: ', $item->link;
-    echo 'Timestamp: ', $item->timestamp;
-    echo 'Description ', $item->description;
-    echo 'HTML encoded content: ', $item->{'content:encoded'};
-  }
+Once data loaded in the DB. You can start your webapplication using below command.
+Use two terminal to run both command separately.
+```bash
+$ php artisan serve
+```
+above commnad will start the Laravel APP
+Open another command tab and go to project directory and run below command
+```bash
+$ npm run dev
 ```
 
-Download Atom feed from URL:
+Now open web browser and use the url `http://127.0.0.1:8000/` or `http://localhost:8000/`
 
-```php
-  $atom = Feeder::loadAtom($url);
-```
 
-## Contributing
 
-Please feel free to fork this package and contribute by submitting a pull request to enhance the functionalities.
-
-## How can I thank you?
-
-Why not star the github repo? I'd love the attention! Why not share the link for this repository on Twitter or HackerNews? Spread the word!
-
-Don't forget to [follow me on twitter](https://twitter.com/unicodeveloper)!
-
-Thanks!
-Prosper Otemuyiwa.
 
 ## License
 
@@ -62,4 +53,4 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 
 ## Security
 
-If you discover any security related issues, please email [prosperotemuyiwa@gmail.com](prosperotemuyiwa@gmail.com) instead of using the issue tracker.
+If you discover any security related issues, please email [nayan.dave@gmail.com](nayan.dave@gmail.com) instead of using the issue tracker.

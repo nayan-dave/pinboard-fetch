@@ -42,6 +42,11 @@
 </template>
 
 <script>
+    /* 
+    * I have fixed the tags so that we dont need to call another API end-point to fetch.
+    * However, if more tags needed we can create additional tags api to fetch tags from server.
+    */
+    
     import axios from 'axios';
     export default {
         name: 'pinboard',
@@ -60,17 +65,11 @@
         },
         methods: {
             getItems: function() {
-                const url = 'http://127.0.0.1:8000/api';
                 axios.get('/api/items',{params: this.select_tags}).then(response =>{
                     this.items = response.data
-                    console.log(response);
-                    console.log(this.products);
                 });
             },
             selectedTags(event){
-                console.log(event.target);
-                console.log(event.target.checked);
-                console.log(event.target.id);
                 if(event.target.checked){
                     this.select_tags.push(event.target.id);
                 }
@@ -86,7 +85,6 @@
             },
         },
         mounted() {
-            //this.getItems();
             console.log('Component mounted.')
         }
     }
